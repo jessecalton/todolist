@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+}
+
+.todoList {
+  padding: 1rem;
+  border: 2px solid rgb(96, 139, 168);
+  margin: 0.7rem 0.7rem;
+  width: 200px;
+  /* flex: 0 0 20%; */
+  justify-content: space-evenly;
+}
+
+.flex-column {
+  /* width: 500px; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.desc {
+  color: coral;
+}
+
+.task {
+  color: aliceblue;
+}

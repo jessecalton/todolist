@@ -7,6 +7,14 @@ const TodoSchema = new Schema({
     type: String,
     required: [true, 'The todo text field is required'],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  timeline: {
+    type: String,
+    required: false,
+  },
 });
 
 //create model for todo
