@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use('/api/todo', require('./routes/todo'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
 
 app.listen(port, () => {
   console.log('Listening on port 5000');

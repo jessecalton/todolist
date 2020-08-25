@@ -52,26 +52,6 @@ const TodoForm = (props) => {
           Submit
         </Button>
       </Form>
-      {/* <form onSubmit={onSubmit}>
-        <h2>Enter your next Todo:</h2>
-        <input
-          type='text'
-          placeholder='Task'
-          name='action'
-          value={action}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          placeholder='Due Date'
-          name='timeline'
-          value={timeline}
-          onChange={onChange}
-        />
-        <div>
-          <input type='submit' />
-        </div>
-      </form> */}
     </div>
   );
 };
