@@ -45,3 +45,20 @@
 .task {
   color: aliceblue;
 }
+
+.NavBar {
+  height: 50px;
+  background-color: turquoise;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.NavBar ul {
+  display: flex;
+}
+
+.NavBar li {
+  margin: 0 20px;
+  list-style-type: none;
+}

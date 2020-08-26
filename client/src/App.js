@@ -4,14 +4,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Todos from './components/todo/Todos';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import NavBar from './layout/NavBar';
+import PrivateRoute from './components/routing/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
     <Router>
       <div className='App'>
+        <NavBar />
         <Switch>
-          <Route exact path='/' component={Todos} />
+          <PrivateRoute exact path='/' component={Todos} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
         </Switch>

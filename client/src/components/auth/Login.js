@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
 
+  const [loginError, setLoginError] = useState({ error: null });
+  const [loginStatus, setLoginStatus] = useState({ authenticated: false });
+
   const { username, password } = user;
+  const { error } = loginError;
+  const { authenticated } = loginStatus;
+
+  useEffect(() => {
+    if (authenticated) {
+      props.history.push('/');
+    }
+
+    if (error) {
+      alert('That is not a user');
+      setLoginError({ ...loginError, error: null });
+    }
+  }, [error, authenticated, props.history]);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,9 +37,15 @@ const Login = () => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post('/api/auth', { username, password }, config);
-    console.log(res.data);
-    setAuthToken(res.data.token);
+    try {
+      const res = await axios.post('/api/auth', { username, password }, config);
+      console.log(res.data);
+      setAuthToken(res.data.token);
+      localStorage.setItem('token', res.data.token);
+      setLoginStatus({ ...loginStatus, authenticated: true });
+    } catch (error) {
+      setLoginError({ ...loginError, error: error });
+    }
   };
 
   const onSubmit = async (e, user) => {
@@ -47,7 +69,7 @@ const Login = () => {
             onChange={onChange}
           />
           <Form.Text className='text-muted'>
-            We will sell your data to Facebook.
+            NGL, we're gonna sell your data to Facebook.
           </Form.Text>
         </Form.Group>
 
