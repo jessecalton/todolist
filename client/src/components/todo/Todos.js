@@ -1,9 +1,11 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, useContext } from 'react';
 import axios from 'axios';
 import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
+import AuthContext from '../../context/auth/authContext';
 
 const Todos = () => {
+  const authContext = useContext(AuthContext);
   const [todos, setTodos] = useState(null);
 
   const getTodos = async () => {
@@ -38,7 +40,9 @@ const Todos = () => {
   };
 
   useEffect(() => {
+    authContext.loadUser();
     getTodos();
+    // eslint-disable-next-line
   }, []);
   return (
     <Fragment>

@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import NavBar from './layout/NavBar';
 import PrivateRoute from './components/routing/PrivateRoute';
 import AuthState from './context/auth/authState';
+import Logout from './components/auth/Logout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
             <PrivateRoute exact path='/' component={Todos} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/logout' component={Logout} />
           </Switch>
         </div>
       </Router>

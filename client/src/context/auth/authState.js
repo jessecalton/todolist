@@ -99,6 +99,10 @@ const AuthState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  // Set Errors
+  const setErrors = (errorMessage) =>
+    dispatch({ type: AUTH_ERROR, payload: errorMessage });
+
   return (
     // `state` comes from `useReducer`
     <AuthContext.Provider
@@ -113,6 +117,7 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
+        setErrors,
       }}
     >
       {props.children}

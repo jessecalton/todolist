@@ -1,21 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import AuthContext from '../../context/auth/authContext';
+import Errors from './Errors';
 
-const Register = () => {
+const Register = (props) => {
+  const authContext = useContext(AuthContext);
   const [user, setUser] = useState({
     username: '',
     password: '',
     password2: '',
   });
 
+  const { register, isAuthenticated, error, setErrors } = authContext;
+
   const { username, password, password2 } = user;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+  }, [error, isAuthenticated, props.history]);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (username === '' || password === '' || password2 === '') {
+      setErrors('Plz add a password');
+    } else if (password !== password2) {
+      setErrors("Passwords don't match");
+    } else {
+      register({ username, password });
+    }
+  };
   return (
     <div>
-      <Form>
+      <Errors errors={error} />
+      <Form onSubmit={onSubmit}>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control

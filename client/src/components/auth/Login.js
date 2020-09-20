@@ -5,7 +5,7 @@ import Errors from './Errors';
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
-  const { login, error, isAuthenticated } = authContext;
+  const { login, error, isAuthenticated, setErrors } = authContext;
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -27,8 +27,10 @@ const Login = (props) => {
     e.preventDefault();
     if (username === '' || password === '') {
       console.log('Invalid username or password');
+      setErrors('Invalid username or password');
+    } else {
+      login({ username, password });
     }
-    login({ username, password });
   };
 
   return (
