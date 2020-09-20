@@ -1,35 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import setAuthToken from '../../utils/setAuthToken';
+import AuthContext from '../../context/auth/authContext';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState({
-    authorized: false,
-    loading: true,
-  });
-  const { authorized, loading } = isLoggedIn;
-  const getAuthToken = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    try {
-      const res = await axios.get('/api/auth');
-      setIsLoggedIn({ authorized: true, loading: false });
-    } catch (error) {
-      console.log(error);
-      setIsLoggedIn({ authorized: false, loading: false });
-    }
-  };
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated } = authContext;
 
-  useEffect(() => {
-    getAuthToken();
-  }, []);
   return (
     <Route
       {...rest}
       render={(props) =>
-        !authorized && !loading ? (
+        !isAuthenticated ? (
           <Redirect to='/login' />
         ) : (
           // Else, render whatever the component is, and any extra props

@@ -1,63 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
+import AuthContext from '../../context/auth/authContext';
+import Errors from './Errors';
 
 const Login = (props) => {
+  const authContext = useContext(AuthContext);
+  const { login, error, isAuthenticated } = authContext;
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
 
-  const [loginError, setLoginError] = useState({ error: null });
-  const [loginStatus, setLoginStatus] = useState({ authenticated: false });
-
   const { username, password } = user;
-  const { error } = loginError;
-  const { authenticated } = loginStatus;
 
   useEffect(() => {
-    if (authenticated) {
+    if (isAuthenticated) {
       props.history.push('/');
     }
-
-    if (error) {
-      alert('That is not a user');
-      setLoginError({ ...loginError, error: null });
-    }
-  }, [error, authenticated, props.history]);
+  }, [error, isAuthenticated, props.history]);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const login = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    try {
-      const res = await axios.post('/api/auth', { username, password }, config);
-      console.log(res.data);
-      setAuthToken(res.data.token);
-      localStorage.setItem('token', res.data.token);
-      setLoginStatus({ ...loginStatus, authenticated: true });
-    } catch (error) {
-      setLoginError({ ...loginError, error: error });
-    }
-  };
-
-  const onSubmit = async (e, user) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
       console.log('Invalid username or password');
     }
-    login();
+    login({ username, password });
   };
 
   return (
     <div>
+      <Errors errors={error} />
       <Form onSubmit={onSubmit}>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
