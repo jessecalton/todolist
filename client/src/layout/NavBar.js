@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
 import AuthContext from '../context/auth/authContext';
 
 const NavBar = () => {
@@ -7,32 +7,34 @@ const NavBar = () => {
   const { isAuthenticated, user, logout } = authContext;
   const onLogout = () => {
     logout();
-    // Clear Todos
+    // TODO (not a pun): Clear Todos
   };
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-      <li>
-        <Link to='/register'>Register</Link>
-      </li>
+      <Nav.Link href='/login' eventKey='login'>
+        Login
+      </Nav.Link>
+
+      <Nav.Link href='/register' eventKey='register'>
+        Register
+      </Nav.Link>
     </Fragment>
   );
 
   const authLinks = (
     <Fragment>
-      <li>'sup {user && user.username}</li>
-      <li>
-        <a onClick={onLogout} href='#!'>
-          Logout
-        </a>
-      </li>
+      <Nav.Item>'sup {user && user.username}</Nav.Item>
+      <Nav.Link as='a' eventKey='logout' href='#!' onSelect={onLogout}>
+        Logout
+      </Nav.Link>
     </Fragment>
   );
   return (
-    <div className='NavBar'>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+    <div>
+      <Navbar bg='light' variant='light' className='justify-content-end'>
+        <Navbar.Brand className='mr-auto'>Ye Olde Todo List</Navbar.Brand>
+        {isAuthenticated ? authLinks : guestLinks}
+      </Navbar>
     </div>
   );
 };

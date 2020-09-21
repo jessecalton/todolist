@@ -8,7 +8,7 @@ const Logout = () => {
   useEffect(() => {
     logout();
   });
-  return <Redirect to='/login' />;
+  return <Redirect to='/' />;
 };
 
 export default Logout;

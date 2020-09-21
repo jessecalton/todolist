@@ -47,7 +47,7 @@ const Todos = () => {
   return (
     <Fragment>
       <TodoForm addTodoItem={addTodoItem} />
-      <h3>Current List: </h3>
+      <h3 style={{ color: 'white' }}>Current List: </h3>
       {todos !== null ? (
         <div className='TodoListItem'>
           {todos.map((item) => (

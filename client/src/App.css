@@ -24,7 +24,6 @@
   border: 2px solid rgb(96, 139, 168);
   margin: 0.7rem 0.7rem;
   width: 200px;
-  /* flex: 0 0 20%; */
   justify-content: space-evenly;
 }
 
@@ -46,7 +45,14 @@
   color: aliceblue;
 }
 
-.NavBar {
+.formWidth {
+  width: 50%;
+  margin: 0 auto;
+  color: white;
+  font-size: 20px;
+}
+
+/* .NavBar {
   height: 50px;
   background-color: turquoise;
   display: flex;
@@ -61,4 +67,4 @@
 .NavBar li {
   margin: 0 20px;
   list-style-type: none;
-}
+} */

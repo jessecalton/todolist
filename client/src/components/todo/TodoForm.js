@@ -27,7 +27,7 @@ const TodoForm = (props) => {
   return (
     <div className='TodoListForm'>
       <Form onSubmit={onSubmit}>
-        <h2>Enter your next Todo:</h2>
+        <h2 style={{ color: 'white' }}>Enter your next Todo:</h2>
         <Row>
           <Col>
             <Form.Control

@@ -26,7 +26,6 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
-      console.log('Invalid username or password');
       setErrors('Invalid username or password');
     } else {
       login({ username, password });
@@ -34,7 +33,7 @@ const Login = (props) => {
   };
 
   return (
-    <div>
+    <div className='formWidth'>
       <Errors errors={error} />
       <Form onSubmit={onSubmit}>
         <Form.Group controlId='formBasicEmail'>

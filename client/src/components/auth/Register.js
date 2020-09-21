@@ -36,7 +36,7 @@ const Register = (props) => {
     }
   };
   return (
-    <div>
+    <div className='formWidth'>
       <Errors errors={error} />
       <Form onSubmit={onSubmit}>
         <Form.Group controlId='formBasicEmail'>
