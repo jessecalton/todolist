@@ -5,8 +5,6 @@ const app = express();
 
 connectDB();
 
-const port = process.env.PORT || 5000;
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -31,6 +29,8 @@ if (process.env.NODE_ENV === 'production') {
   // This is saying "look at the current directory, then look at client, then build, then load index.html"
 }
 
+const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
-  console.log('Listening on port 5000');
+  console.log(`Listening on port ${port}`);
 });
